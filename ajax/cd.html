@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Lista de Autores</title>
+  <script>
+  var loadXMLDoc = function() {
+   var xmlhttp;
+   var txt, x;  
+   if (window.XMLHttpRequest) {
+    xmlhttp = new XMLHttpRequest();
+   } else {
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+   }
+
+   xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status==200) {
+     xmlDoc=xmlhttp.responseXML;
+     txt="";
+     x = xmlDoc.getElementsByTagName("ARTIST");
+     for ( var i=0; i<x.length; i++) {
+      txt = txt + x[i].childNodes[0].nodeValue + "<br>";
+     }
+     document.getElementById("myDiv").innerHTML=txt;
+    }
+   }
+   xmlhttp.open("GET", "artist.xml", true);
+   xmlhttp.send();
+   }
+  }
+  </script>
+ </head>
+
+ 
+ <body>
+  <h2>CD Collection</h2>
+  <div id="myDiv">HERE COMES THE SUN</div>
+  <button type="button" onclick="loadXMLDoc()">Get the CD collection</button>
+ </body>
+</html>
+  
