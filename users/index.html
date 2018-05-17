@@ -21,6 +21,22 @@
 						}
 					});
 				});
+				$("#insert").click(function() {
+					var firstN = $("#firstName").val();
+					var lastN  = $("#lastName").val();
+					$.ajax({
+						url: "scripts/insert_element.py",
+						type: "post",
+						datatype: "json",
+						data: {'lastName': firstN, 'firstName': lastN},
+						success: function(response) {
+							alert(response.message);
+						},
+						error: function(request, status, error) {
+							alert(request.responseText);
+						}
+					});
+				});
 			});
 		</script>
 	</head>
@@ -30,14 +46,15 @@
 			<small class="text-muted">It should be working</small>
 		</h4>
 		<div class="alert alert-primary" role="alert">
-			This should work and be in red
+			This should work and be in red <br>
+			Well... it is actually blue.
 		</div>
 		<div id="#form">
-			<form action="scripts/insert_element.py" method="post">
-				First name: <input type="text" name="firstName" placeholder="Nombre"><br>
-				Last name: <input type="text" name="lastName" placeholder="Apellido"><br>
-				<input type="submit" value="Submit">
-			</form>
+			<div>
+				First name: <input id="firstName" type="text" name="firstName" placeholder="Nombre"><br>
+				Last name: <input id="lastName" type="text" name="lastName" placeholder="Apellido"><br>
+				<input id="insert" type="submit" value="Submit">
+			</div>
 		</div>
 		<button id="testButton">Click!</button>
 		<a href="another.html">Another webpage</a>
